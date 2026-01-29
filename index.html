@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkView-Doc</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 側邊欄 -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>📑 文件選單</h2>
+            <button id="sidebar-close" class="sidebar-close" aria-label="關閉選單">✕</button>
+        </div>
+        <nav id="sidebar-nav" class="sidebar-nav">
+            <!-- 選單項目將由 JavaScript 動態生成 -->
+        </nav>
+    </aside>
+    
+    <!-- 遮罩層 -->
+    <div id="overlay" class="overlay"></div>
+    
+    <!-- 主要容器 -->
+    <div class="container">
+        <header>
+            <button id="sidebar-toggle" class="sidebar-toggle mobile-only" aria-label="開啟選單">
+                <span class="hamburger">☰</span>
+            </button>
+            <h1>📄 MarkView-Doc</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="切換主題">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+        
+        <main>
+            <div class="content-wrapper">
+                <aside id="toc-sidebar" class="toc-sidebar">
+                    <div class="toc-header">目錄</div>
+                    <nav id="toc-nav"></nav>
+                </aside>
+                <div id="content">
+                    <div class="loading">載入中...</div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>支援離線瀏覽 | MarkView-Doc</p>
+        </footer>
+    </div>
+    
+    <!-- Marked.js - Markdown 解析器 (CDN with fallback) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Prism.js - 語法高亮 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

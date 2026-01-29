@@ -1,0 +1,794 @@
+/* 全局樣式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 讓滾動更平滑 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* CSS 變數定義 - 專業商務/文檔主題 (Professional Doc Theme) */
+:root {
+    /* 核心色調 - 專業藍與深灰 (Slate & Royal Blue) */
+    --primary-color: #2563eb;       /* 專業藍 */
+    --primary-hover: #1d4ed8;       /* 深藍 (Hover) */
+    
+    /* 背景色 */
+    --bg-body: #f8fafc;             /* 頁面背景 (極淡灰) */
+    --bg-surface: #ffffff;          /* 內容區塊背景 (白) */
+    --bg-sidebar: #ffffff;          /* 側邊欄背景 */
+    
+    /* 標頭樣式 - 簡潔白底風格 */
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --header-text: #0f172a;
+    --header-border: 1px solid #e2e8f0;
+    --header-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+
+    /* 文字顏色 */
+    --text-primary: #1e293b;        /* 主要文字 (深石板灰) */
+    --text-secondary: #64748b;      /* 次要文字 (淺石板灰) */
+    --text-tertiary: #94a3b8;       /* 裝飾性文字 */
+
+    /* 邊框與分隔線 */
+    --border-color: #e2e8f0;
+    
+    /* 程式碼區塊 */
+    --code-bg: #f1f5f9;
+    --code-text: #334155;
+    --code-block-bg: #1e293b;       /* 程式碼區塊維持深色，對比度高 */
+    --code-block-text: #e2e8f0;
+
+    /* 元件樣式 */
+    --blockquote-border: #2563eb;
+    --table-header-bg: #f1f5f9;
+    --table-header-text: #1e293b;
+    --table-row-even: #f8fafc;
+    --link-color: #2563eb;
+    
+    /* 狀態色 */
+    --error-bg: #fef2f2;
+    --error-border: #fecaca;
+    --error-text: #991b1b;
+
+    /* 陰影 */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+/* 暗色主題 - 現代深色模式 */
+[data-theme="dark"] {
+    --primary-color: #60a5fa;       /* 較亮的藍，適合深底 */
+    --primary-hover: #93c5fd;
+
+    --bg-body: #0f172a;             /* 深邃藍黑 */
+    --bg-surface: #1e293b;          /* 較淺的藍黑 */
+    --bg-sidebar: #0f172a;          /* 與背景融合 */
+
+    --header-bg: rgba(15, 23, 42, 0.9);
+    --header-text: #f1f5f9;
+    --header-border: 1px solid #334155;
+    --header-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+
+    --border-color: #334155;
+
+    --code-bg: #334155;
+    --code-text: #e2e8f0;
+    --code-block-bg: #020617;       /* 極深黑 */
+    --code-block-text: #e2e8f0;
+
+    --blockquote-border: #60a5fa;
+    --table-header-bg: #1e293b;
+    --table-header-text: #e2e8f0;
+    --table-row-even: #172033;
+    --link-color: #60a5fa;
+
+    --error-bg: #450a0a;
+    --error-border: #7f1d1d;
+    --error-text: #fca5a5;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* 基礎樣式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", 
+                 "Microsoft JhengHei", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7; /* 增加行距，提升閱讀感 */
+    color: var(--text-primary);
+    background-color: var(--bg-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased; /* 字體平滑 */
+}
+
+/* 容器佈局 */
+.container {
+    max-width: none;
+    width: calc(100% - 280px); /* 稍微加寬側邊欄 */
+    margin-left: 280px;
+    background-color: var(--bg-body); /* 容器背景改為與 body 一致 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更細緻的過渡 */
+    position: relative;
+}
+
+/* 左側主側邊欄 */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    height: 70px; /* 固定高度，與 header 一致 */
+    padding: 0 1.5rem; /* 改為左右 padding，上下由 flex 垂直置中控制 */
+    background: transparent; /* 移除漸層 */
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--bg-sidebar); /* 滾動時遮擋 */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.sidebar-close {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.sidebar-close:hover {
+    background: var(--bg-body);
+    color: var(--text-primary);
+}
+
+.sidebar-nav {
+    padding: 1rem 0;
+    flex: 1;
+}
+
+.sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border-right: 3px solid transparent;
+    margin-bottom: 2px;
+}
+
+.sidebar-nav-item:hover {
+    background-color: var(--bg-body);
+    color: var(--primary-color);
+}
+
+.sidebar-nav-item.active {
+    background-color: rgba(37, 99, 235, 0.05); /* 極淡的藍色背景 */
+    color: var(--primary-color);
+    border-right-color: var(--primary-color); /* 指示條改在右側 */
+    font-weight: 600;
+}
+
+.sidebar-nav-item-icon {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* 遮罩層 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px); /* 模糊效果 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 頁首 */
+header {
+    height: 70px; /* 固定高度 */
+    background: var(--header-bg);
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    color: var(--header-text);
+    padding: 0 2rem; /* 只留左右 padding */
+    text-align: center;
+    position: sticky; /* 黏性頂部 */
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: var(--header-border);
+    box-shadow: var(--header-shadow);
+}
+
+header h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    flex: 1;
+    color: var(--text-primary);
+}
+
+/* 按鈕通用樣式 */
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.btn-icon:hover {
+    background: var(--bg-surface);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 漢堡選單 */
+.sidebar-toggle {
+    position: absolute;
+    left: 2rem;
+    display: none; /* Mobile only */
+    /* .btn-icon styles manually applied since @extend is not valid CSS */
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.sidebar-toggle:hover {
+    background: var(--bg-surface);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 主題切換 - 增強版 */
+.theme-toggle {
+    position: absolute;
+    right: 2rem;
+    
+    /* 基礎按鈕樣式 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 更大、更明顯的尺寸 */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%; /* 圓形更現代 */
+    font-size: 1.5rem;
+    
+    /* 顯眼的配色 */
+    background-color: var(--bg-surface);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px) scale(1.05);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+    background-color: var(--bg-surface);
+}
+
+.theme-toggle:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* 暗色模式下的微調 */
+[data-theme="dark"] .theme-toggle {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+    color: var(--primary-color); /* 預設就亮一點 */
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background-color: rgba(96, 165, 250, 0.1);
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+}
+
+/* 主要內容區佈局 */
+main {
+    flex: 1;
+    width: 100%;
+    padding: 2rem;
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1400px; /* 加寬最大寬度 */
+    margin: 0 auto;
+    gap: 3rem; /* 增加間距 */
+    align-items: flex-start;
+}
+
+/* TOC (目錄) 側邊欄 */
+.toc-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 6rem; /* 避開 sticky header */
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    padding-right: 1rem;
+    /* 捲軸樣式微調 */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.toc-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-tertiary);
+    padding-left: 0.5rem;
+}
+
+#toc-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* 添加左側線條指示器 */
+#toc-nav ul::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--border-color);
+}
+
+#toc-nav li {
+    margin-bottom: 0;
+    position: relative;
+}
+
+#toc-nav a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    line-height: 1.5;
+    padding: 0.4rem 0 0.4rem 1rem; /* 增加左側 padding 對齊線條 */
+    border-left: 2px solid transparent; /* 用於 active 狀態 */
+    margin-left: -2px; /* 覆蓋上面的線條 */
+}
+
+#toc-nav a:hover {
+    color: var(--text-primary);
+}
+
+#toc-nav a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    border-left-color: var(--primary-color);
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
+}
+
+/* TOC 層級縮排優化 */
+#toc-nav .toc-h1 { padding-left: 1rem; font-weight: 700; }
+#toc-nav .toc-h2 { padding-left: 1rem; }
+#toc-nav .toc-h3 { padding-left: 2rem; font-size: 0.85rem; }
+#toc-nav .toc-h4 { padding-left: 3rem; font-size: 0.85rem; }
+
+/* 文章內容區塊 */
+#content {
+    flex: 1;
+    min-width: 0;
+    background-color: var(--bg-surface);
+    padding: 3rem 4rem; /* 增加內距，像紙張一樣 */
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+/* 載入提示 */
+.loading {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    padding: 4rem;
+    text-align: center;
+}
+
+/* 錯誤提示 */
+.error {
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    border-radius: 8px;
+    padding: 2rem;
+    color: var(--error-text);
+}
+
+/* Markdown 內容排版優化 */
+#content h1, #content h2, #content h3, #content h4 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.4;
+    scroll-margin-top: 6rem; /* 重要：點擊跳轉時的頂部留白 */
+}
+
+#content h1 {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+#content h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#content h3 {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem; /* 稍微加大內文字級 */
+    color: var(--text-primary);
+}
+
+#content a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+#content a:hover {
+    border-bottom-color: var(--link-color);
+}
+
+#content ul, #content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+}
+
+#content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* 引用塊 - 專業設計 */
+#content blockquote {
+    border-left: 4px solid var(--blockquote-border);
+    background-color: rgba(37, 99, 235, 0.05); /* 極淡藍色背景 */
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-secondary);
+    font-style: normal; /* 取消斜體，更現代 */
+}
+
+#content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* 圖片 */
+#content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-md);
+    display: block;
+}
+
+/* 表格 */
+#content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+#content table th,
+#content table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#content table th {
+    background-color: var(--table-header-bg);
+    color: var(--table-header-text);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+}
+
+#content table tr:last-child td {
+    border-bottom: none;
+}
+
+#content table tr:hover td {
+    background-color: var(--table-row-even);
+}
+
+/* 程式碼區塊 */
+#content code {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+    font-size: 0.9em;
+}
+
+#content pre {
+    background-color: var(--code-block-bg);
+    color: var(--code-block-text);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-md);
+    line-height: 1.6;
+}
+
+#content pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+/* 複製按鈕 - 懸浮樣式 */
+.code-block-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.code-language {
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-family: sans-serif;
+    font-weight: 500;
+    text-transform: lowercase;
+    pointer-events: none;
+    border-radius: 0 0 4px 4px; /* 圓角向下，像標籤 */
+}
+
+.code-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    backdrop-filter: blur(4px);
+}
+
+.code-copy-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 頁尾 */
+footer {
+    background-color: var(--bg-body);
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    border-top: none;
+    margin-top: 2rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        padding: 0 2rem;
+    }
+    
+    #content {
+        padding: 2.5rem;
+    }
+}
+
+@media (max-width: 1400px) {
+    /* 容器適應：移除左側邊距 */
+    .container {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    /* 左側主側邊欄：預設隱藏 (Off-canvas) */
+    .sidebar {
+        left: -280px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .sidebar.active {
+        left: 0;
+    }
+
+    /* 顯示 Header 上的漢堡選單按鈕 */
+    .mobile-only {
+        display: flex !important;
+    }
+    
+    .sidebar-toggle {
+        display: flex; /* 確保顯示 */
+    }
+
+    /* 顯示側邊欄內的關閉按鈕 */
+    .sidebar-close {
+        display: flex;
+    }
+    
+    /* 啟用遮罩層 */
+    .overlay {
+        display: block;
+    }
+    
+    /* Header 調整 */
+    header {
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+    }
+    
+    header h1 {
+        text-align: left;
+        padding-left: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    /* 按鈕位置調整 */
+    .sidebar-toggle, .theme-toggle {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        transform: none;
+    }
+    
+    /* 
+       在此斷點 (1400px) 保持 TOC 顯示，
+       因為我們已經收起了左側主選單，空間是足夠的。
+    */
+}
+
+@media (max-width: 1024px) {
+    /* TOC 側邊欄：螢幕更小時才隱藏 */
+    .toc-sidebar {
+        display: none; 
+    }
+    
+    /* 內容區塊調整為單欄 */
+    .content-wrapper {
+        display: block;
+        max-width: 900px;
+        padding: 0;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+    
+    #content {
+        padding: 2rem;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 手機版更緊湊的調整 */
+    main {
+        padding: 1rem;
+    }
+    
+    #content {
+        padding: 1.5rem;
+    }
+    
+    #content h1 {
+        font-size: 1.75rem;
+    }
+}
