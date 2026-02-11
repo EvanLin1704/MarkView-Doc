@@ -5,9 +5,39 @@ let currentFile = null;
 document.addEventListener('DOMContentLoaded', function() {
     initTheme();
     setupThemeToggle();
-    setupSidebar();
+    
+    // 檢查是否啟用側邊欄
+    const isSidebarEnabled = typeof ENABLE_SIDEBAR !== 'undefined' ? ENABLE_SIDEBAR : true;
+    
+    if (isSidebarEnabled) {
+        setupSidebar();
+    } else {
+        // 如果禁用側邊欄，移除相關元素並調整樣式
+        removeSidebar();
+    }
+    
     initMarkdownViewer();
 });
+
+/**
+ * 移除側邊欄相關功能與樣式
+ */
+function removeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const overlay = document.getElementById('overlay');
+    const container = document.querySelector('.container');
+    
+    if (sidebar) sidebar.remove();
+    if (sidebarToggle) sidebarToggle.remove();
+    if (overlay) overlay.remove();
+    
+    // 調整容器樣式，移除側邊欄留白
+    if (container) {
+        container.style.marginLeft = '0';
+        container.style.width = '100%';
+    }
+}
 
 /**
  * 初始化主題

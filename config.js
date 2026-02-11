@@ -1,4 +1,7 @@
 // Markdown 文件配置
+// 是否啟用側邊欄 (左側文件選單)
+const ENABLE_SIDEBAR = true;
+
 // 在這裡定義您的 Markdown 文件清單
 const MARKDOWN_CONFIG = [
     {

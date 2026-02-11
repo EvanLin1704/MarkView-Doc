@@ -59,6 +59,9 @@ npx http-server
 這是最重要的配置文件，您只需要修改這個文件即可：
 
 ```javascript
+// 是否啟用側邊欄 (左側文件選單)
+const ENABLE_SIDEBAR = true;
+
 const MARKDOWN_CONFIG = [
     {
         name: '首頁',           // 側邊欄顯示的名稱
