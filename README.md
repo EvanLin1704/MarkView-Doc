@@ -147,17 +147,6 @@ http://localhost:8000/?file=docs/guide.md
 - **LocalStorage**: 儲存使用者偏好設定
 - **History API**: 支援瀏覽器前進/後退
 
-## 📦 離線版本設定
-
-如需完全離線使用：
-
-1. 下載 marked.js: https://cdn.jsdelivr.net/npm/marked/marked.min.js
-2. 將檔案儲存為 `marked.min.js` 放在專案根目錄
-3. 修改 `index.html` 第 35 行為：
-   ```html
-   <script src="marked.min.js"></script>
-   ```
-
 ## 🐛 疑難排解
 
 ### 文件無法載入
@@ -179,4 +168,4 @@ http://localhost:8000/?file=docs/guide.md
 
 ---
 
-**Version 2.0.0** | Made with ❤️
+**Version 1.1.1** | Made with Evan Lin
