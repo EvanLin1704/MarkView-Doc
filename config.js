@@ -1,4 +1,7 @@
 // Markdown 文件配置
+// 預設主題：'light' 或 'dark'（使用者手動切換後會以其選擇為準）
+const DEFAULT_THEME = 'light';
+
 // 是否啟用側邊欄 (左側文件選單)
 const ENABLE_SIDEBAR = true;
 

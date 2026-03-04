@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
@@ -7,29 +7,23 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- 側邊欄 -->
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-header">
-        <h2>📑 文件選單</h2>
-        <button id="sidebar-close" class="sidebar-close" aria-label="關閉選單">✕</button>
+        <h2>文件選單</h2>
       </div>
-      <nav id="sidebar-nav" class="sidebar-nav">
-        <!-- 選單項目將由 JavaScript 動態生成 -->
-      </nav>
+      <nav id="sidebar-nav" class="sidebar-nav"></nav>
     </aside>
 
-    <!-- 遮罩層 -->
     <div id="overlay" class="overlay"></div>
 
-    <!-- 主要容器 -->
     <div class="container">
       <header>
-        <button id="sidebar-toggle" class="sidebar-toggle mobile-only" aria-label="開啟選單">
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="開啟選單">
           <span class="hamburger">☰</span>
         </button>
-        <h1>📄 MarkView-Doc</h1>
+        <h1>MarkView-Doc</h1>
         <button id="theme-toggle" class="theme-toggle" aria-label="切換主題">
-          <span class="theme-icon">🌙</span>
+          <span class="theme-icon">☀️</span>
         </button>
       </header>
 
@@ -46,20 +40,13 @@
       </main>
 
       <footer>
-        <p><a href="https://github.com/EvanLin1704/MarkView-Doc" target="_blank" rel="noopener noreferrer">MarkView-Doc v1.1.1</a></p>
+        <p><a href="https://github.com/EvanLin1704/MarkView-Doc" target="_blank" rel="noopener noreferrer">MarkView-Doc v2.0.0</a></p>
       </footer>
     </div>
 
-    <!-- Marked.js - Markdown 解析器 (https://cdn.jsdelivr.net/npm/marked/marked.min.js") -->
     <script src="assets/marked.min.js"></script>
-
-    <!-- Prism.js - 語法高亮(https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css) -->
-    <link rel="stylesheet" href="assets/prism-tomorrow.min.css" />
-    <!-- Prism.js - (https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js) -->
-    <script src="assets/prism.min.js"></script>
-    <!-- Prism.js - (https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js) -->
-    <script src="assets/prism-autoloader.min.js"></script>
-
+    <link rel="stylesheet" href="assets/prism.css" />
+    <script src="assets/prism.js"></script>
     <script src="config.js"></script>
     <script src="app.js"></script>
   </body>

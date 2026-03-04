@@ -162,24 +162,16 @@ body {
     margin: 0;
 }
 
-.sidebar-close {
-    display: none;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-}
 
-.sidebar-close:hover {
-    background: var(--bg-body);
-    color: var(--text-primary);
+@media (min-width: 1401px) {
+    body.sidebar-collapsed .sidebar {
+        left: -280px;
+    }
+
+    body.sidebar-collapsed .container {
+        width: 100%;
+        margin-left: 0;
+    }
 }
 
 .sidebar-nav {
@@ -190,14 +182,14 @@ body {
 .sidebar-nav-item {
     display: flex;
     align-items: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.2s ease;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     border-right: 3px solid transparent;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .sidebar-nav-item:hover {
@@ -264,34 +256,11 @@ header h1 {
     color: var(--text-primary);
 }
 
-/* 按鈕通用樣式 */
-.btn-icon {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: all 0.2s ease;
-    color: var(--text-secondary);
-}
-
-.btn-icon:hover {
-    background: var(--bg-surface);
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-sm);
-}
-
 /* 漢堡選單 */
 .sidebar-toggle {
     position: absolute;
     left: 2rem;
-    display: none; /* Mobile only */
+    display: flex; /* 所有螢幕尺寸皆顯示 */
     /* .btn-icon styles manually applied since @extend is not valid CSS */
     background: transparent;
     border: 1px solid var(--border-color);
@@ -625,6 +594,14 @@ main {
     font-size: 0.9em;
 }
 
+/* YAML 註解提高亮度，改善在深色 code block 的可讀性 */
+#content pre.language-yaml .token.comment,
+#content code.language-yaml .token.comment,
+#content pre.language-yml .token.comment,
+#content code.language-yml .token.comment {
+    color: #cbd5e1 !important;
+}
+
 /* 複製按鈕 - 懸浮樣式 */
 .code-block-wrapper {
     position: relative;
@@ -679,6 +656,16 @@ footer {
     margin-top: 2rem;
 }
 
+footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
 /* 響應式設計 */
 @media (max-width: 1200px) {
     .content-wrapper {
@@ -707,20 +694,6 @@ footer {
         left: 0;
     }
 
-    /* 顯示 Header 上的漢堡選單按鈕 */
-    .mobile-only {
-        display: flex !important;
-    }
-    
-    .sidebar-toggle {
-        display: flex; /* 確保顯示 */
-    }
-
-    /* 顯示側邊欄內的關閉按鈕 */
-    .sidebar-close {
-        display: flex;
-    }
-    
     /* 啟用遮罩層 */
     .overlay {
         display: block;

@@ -43,8 +43,9 @@ function removeSidebar() {
  * 初始化主題
  */
 function initTheme() {
-    // 從 localStorage 讀取儲存的主題設定，預設為亮色
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    // 從 localStorage 讀取儲存的主題設定，fallback 到 config.js 的 DEFAULT_THEME
+    const defaultTheme = typeof DEFAULT_THEME !== 'undefined' ? DEFAULT_THEME : 'light';
+    const savedTheme = localStorage.getItem('theme') || defaultTheme;
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 }
@@ -85,30 +86,45 @@ function setupSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const sidebarToggle = document.getElementById('sidebar-toggle');
-    const sidebarClose = document.getElementById('sidebar-close');
-    
-    // 開啟側邊欄
+    function isDesktop() {
+        return window.innerWidth > 1400;
+    }
+
+    // 初始化：從 localStorage 還原桌面版收合狀態
+    if (isDesktop() && localStorage.getItem('sidebarCollapsed') === 'true') {
+        document.body.classList.add('sidebar-collapsed');
+    }
+
+    // 切換側邊欄（漢堡按鈕）
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', function() {
-            sidebar.classList.add('active');
-            overlay.classList.add('active');
+            if (isDesktop()) {
+                // 桌面版：切換收合/展開
+                const collapsed = document.body.classList.toggle('sidebar-collapsed');
+                localStorage.setItem('sidebarCollapsed', collapsed);
+            } else {
+                // 手機版：開啟 off-canvas 側邊欄
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+            }
         });
     }
-    
-    // 關閉側邊欄
+
+    // 關閉側邊欄（關閉按鈕 / 遮罩點擊）
     function closeSidebar() {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
+        if (isDesktop()) {
+            document.body.classList.add('sidebar-collapsed');
+            localStorage.setItem('sidebarCollapsed', 'true');
+        } else {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
     }
-    
-    if (sidebarClose) {
-        sidebarClose.addEventListener('click', closeSidebar);
-    }
-    
+
     if (overlay) {
         overlay.addEventListener('click', closeSidebar);
     }
-    
+
     // 生成側邊欄選單
     generateSidebarMenu();
 }
@@ -128,7 +144,7 @@ function generateSidebarMenu() {
     sidebarNav.innerHTML = '';
     
     // 為每個文件創建選單項目
-    MARKDOWN_CONFIG.forEach((item, index) => {
+    MARKDOWN_CONFIG.forEach((item) => {
         const navItem = document.createElement('div');
         navItem.className = 'sidebar-nav-item';
         navItem.dataset.file = item.file;
